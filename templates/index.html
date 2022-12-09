@@ -2,52 +2,19 @@
 <html>
 <head>
   <title>Image Quiz</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #fff;
-      text-align: center;
-    }
-    h1 {
-      color: #00b8d4;
-      font-size: 32px;
-      margin: 20px 0;
-    }
-    p {
-      margin-top: 0;
-      color: #6a6a6a;
-    }
-    form {
-      margin: 20px 0;
-      display: inline-block;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #6a6a6a;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-    }
-    input[type="submit"] {
-      background-color: #00b8d4;
-      color: #fff;
-      padding: 5px 10px;
-      border: none;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
-  <h1>Image Quiz</h1>
-  <p>Enter the prompt and options for your image quiz:</p>
-  <form>
-    <label>Prompt:</label><br>
-    <input type="text" name="prompt"><br>
-    <label>Options:</label><br>
-    <input type="text" name="options"><br>
-    <input type="submit" value="Submit">
-  </form>
+  <div>
+    <h1>Image Quiz</h1>
+    <form>
+      <label for="prompt">Prompt:</label>
+      <input type="text" id="prompt" name="prompt"><br><br><br>
+      <label for="options">Options:</label>
+      <!-- <textarea id="options" name="options" rows="4" cols="50"></textarea><br><br> -->
+      <input type="text" id="options" name="options"></input><br><br><br>
+      <button type="submit">Submit</button>
+    </form> 
+  </div>
 </body>
 </html>
