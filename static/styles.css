@@ -58,8 +58,8 @@ textarea {
 }
 
 button[type="submit"] {
-  width: 80px;
-  height: 30px;
+  width: 120px;
+  height: 40px;
   background-color: #00b0f0;
   border: none;
   border-radius: 3px;

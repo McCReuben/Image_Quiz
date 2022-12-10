@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
-  <div class="center_block">
+    <div class="center_block">
     <h1>Image Quiz</h1>
     <form action="/" method="post">
       <label for="prompt">Prompt:</label>
@@ -13,7 +13,7 @@
       <label for="options">Options:</label>
       <!-- <textarea id="options" name="options" rows="4" cols="50"></textarea><br><br> -->
       <input type="text" id="options" name="options"></input><br><br><br>
-      <button type="submit">Submit</button>
+      <button type="submit">Submit</button><br><br>
       {% for message in get_flashed_messages() %}
         <div class="error">{{ message }}</div>
       {% endfor %}

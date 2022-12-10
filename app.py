@@ -63,8 +63,8 @@ def create_quiz(images):
 def index():
     if request.method == "POST":
         prompt = request.form['prompt']
-        options = request.form['options'].split(',')
-        if options == ['']:
+        options = request.form['options']
+        if options == '':
             flash('Error: Options are required.')
         else:        
             return redirect(url_for('quiz', prompt=prompt, options=options))
@@ -74,11 +74,13 @@ def index():
 @app.route('/quiz', methods=('GET', 'POST'))
 def quiz():
     prompt = request.args.get("prompt")
-    options = request.args.get("options")
+    options = request.args.get("options").split(',')
+    print(options)
     # searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
     searches_tmp = read_imgs()
     all_photos = [[res['original'] for res in search[0:10]] for search in searches_tmp]
     quiz_images = create_quiz(images = dict(zip(options, all_photos)))
+    print(options)
     return render_template('quiz.html', quiz_images=quiz_images, options=options)
 
 
