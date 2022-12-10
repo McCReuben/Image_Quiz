@@ -75,12 +75,10 @@ def index():
 def quiz():
     prompt = request.args.get("prompt")
     options = request.args.get("options").split(',')
-    print(options)
     # searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
     searches_tmp = read_imgs()
     all_photos = [[res['original'] for res in search[0:10]] for search in searches_tmp]
     quiz_images = create_quiz(images = dict(zip(options, all_photos)))
-    print(options)
     return render_template('quiz.html', quiz_images=quiz_images, options=options)
 
 

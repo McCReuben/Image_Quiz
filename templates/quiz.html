@@ -11,7 +11,10 @@
         <h3> Which of these pictures is from a {{ options[0] }}?</h3>
         <div class="grid">
             {% for image in quiz_images %}
-                <img src="{{ image[1] }}" class="grid-item" onclick="clickImage(1)"/>
+                <div class="grid-container">
+                    <img id="grid-item" src="{{ image[1] }}" class="grid-item">
+                    <div class="overlay" onclick="highlightImage(this, '{{ image[0] }}', '{{ options[0] }}')"></div>
+                </div>
             {% endfor %}
         </div><br><br>
         <button type="submit">Finish</button>
