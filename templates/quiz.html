@@ -1,0 +1,16 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3x3 Grid of Clickable Images</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script src="{{ url_for('static', filename='quiz.js') }}"></script>
+  </head>
+  <body>
+    <div class="grid">
+      {% for image in quiz_images %}
+          <img src="{{ image[1] }}" class="grid-item" onclick="clickImage(1)"/>
+      {% endfor %}
+    </div>
+  </body>
+</html>
