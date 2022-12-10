@@ -7,19 +7,21 @@ body {
   /* margin-top: 20px; */
 }
 
-div {
-  display: inline-block;
-  background-color: #ffffffdb;
-  padding: 60px;
-  border-radius: 10px;
-  width: 400px;
-}
 
 .error {
   color: red;
   font-weight: bold;
   width: 300px;
 }
+
+.center_block {
+  display: inline-block;
+  background-color: #ffffffdb;
+  padding: 60px;
+  border-radius: 10px;
+  width: 500px;
+}
+
 
 .grid {
   margin: auto;

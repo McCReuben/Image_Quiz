@@ -7,10 +7,12 @@
     <script src="{{ url_for('static', filename='quiz.js') }}"></script>
   </head>
   <body>
-    <div class="grid">
-      {% for image in quiz_images %}
-          <img src="{{ image[1] }}" class="grid-item" onclick="clickImage(1)"/>
-      {% endfor %}
-    </div>
+    <div class="center_block">   
+        <h3> Which of these pictures is from a {{ options }}</h3>
+        <div class="grid">
+        {% for image in quiz_images %}
+            <img src="{{ image[1] }}" class="grid-item" onclick="clickImage(1)"/>
+        {% endfor %}
+    </div></div>
   </body>
 </html>

@@ -47,13 +47,17 @@ def create_quiz(images):
     
     # Assign grid slots to categories randomly
     picture_idx_order = [random.randint(0,n_categories-1) for _ in range(0,n_pictures)]
+    picture_category_order = [keys[i] for i in picture_idx_order]
     pics_per_category = pandas.value_counts(picture_idx_order)
     
     grab_pics_2dlst = [random.sample(images[keys[i]], pics_per_category[i]) for i in range(0,n_categories)]
     urls_in_order_lst = [grab_pics_2dlst[picture_idx_order[i]].pop() for i in range(0,n_pictures)]
-    urls_with_category_2dlst = list(zip(picture_idx_order, urls_in_order_lst))
+    urls_with_category_2dlst = list(zip(picture_category_order, urls_in_order_lst))
     
     return urls_with_category_2dlst
+
+
+
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
@@ -75,7 +79,7 @@ def quiz():
     searches_tmp = read_imgs()
     all_photos = [[res['original'] for res in search[0:10]] for search in searches_tmp]
     quiz_images = create_quiz(images = dict(zip(options, all_photos)))
-    return render_template('quiz.html', quiz_images=quiz_images)
+    return render_template('quiz.html', quiz_images=quiz_images, options=options)
 
 
 
