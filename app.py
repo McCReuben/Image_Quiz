@@ -5,7 +5,7 @@ import secrets
 import pandas
 import pickle
 from serpapi import GoogleSearch
-from flask import Flask, request, redirect, render_template, url_for, flash
+from flask import Flask, request, redirect, render_template, url_for, flash, session
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
@@ -57,8 +57,6 @@ def create_quiz(images):
     return urls_with_category_2dlst
 
 
-
-
 @app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method == "POST":
@@ -70,19 +68,33 @@ def index():
             return redirect(url_for('quiz', prompt=prompt, options=options))
     return render_template('index.html')
 
-
 @app.route('/quiz', methods=('GET', 'POST'))
 def quiz():
-    prompt = request.args.get("prompt")
-    options = request.args.get("options").split(',')
-    print(options)
-    # searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
-    searches_tmp = read_imgs()
-    all_photos = [[res['original'] for res in search[0:10]] for search in searches_tmp]
-    quiz_images = create_quiz(images = dict(zip(options, all_photos)))
-    print(options)
-    return render_template('quiz.html', quiz_images=quiz_images, options=options)
+    print("QUIZ")
+    if request.args.get("continuation") == "yes":
+        session['idx'] = session['idx'] + 1
+        print("CONTINUE")
+        print(session['idx'])
+        return render_template('quiz.html', quiz_images=session['quiz_images'], option=session['options'][session['idx']], cont='yes')
+    else:
+        session['idx'] = 0
+        session['prompt'] = request.args.get("prompt")
+        session['options'] = request.args.get("options").split(',')
+        # searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
+        searches_tmp = read_imgs()
+        session['all_photos'] = [[res['original'] for res in search[0:10]] for search in searches_tmp]
+    session['quiz_images'] = create_quiz(images = dict(zip(session['options'], session['all_photos'])))
+    print(session['options'][session['idx']])
+    return render_template('quiz.html', quiz_images=session['quiz_images'], option=session['options'][session['idx']])
 
+def continue_quiz():
+    pass
+    # if idx >= len(options):
+    #     idx = 0
+    #     return render_template('index.html')
+    # idx = idx + 1
+    # quiz_images = create_quiz(images = dict(zip(options, all_photos)))
+    # return render_template('quiz.html', quiz_images=quiz_images, options=options[idx])
 
 
 def read_imgs():

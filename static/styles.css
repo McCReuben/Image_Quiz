@@ -35,6 +35,32 @@ body {
   height: 100%;
   object-fit: cover;
   cursor: pointer;
+  /* border-style: solid; */
+  position: relative;
+  z-index: 1;
+}
+
+.overlay {
+  position: relative;
+  border-style: solid;
+  top: -105%;
+  width: 99%;
+  height: 100%;
+  border-color: black;
+  opacity: 0;
+  z-index: 2;
+}
+
+#response {
+  font-weight: bold;
+  color: green;
+  font-size: large;
+}
+
+#next-button {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 form {

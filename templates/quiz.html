@@ -8,13 +8,18 @@
   </head>
   <body>
     <div class="center_block">   
-        <h3> Which of these pictures is from a {{ options[0] }}?</h3>
+        <h3> Which of these pictures is from a {{ option }}?</h3>
         <div class="grid">
             {% for image in quiz_images %}
-                <img src="{{ image[1] }}" class="grid-item" onclick="clickImage(1)"/>
+                <div class="grid-container">
+                    <img id="grid-item" src="{{ image[1] }}" class="grid-item">
+                    <div class="overlay" onclick="highlightImage(this, '{{ image[0] }}', '{{ option }}')"></div>
+                </div>
             {% endfor %}
-        </div><br><br>
-        <button type="submit">Finish</button>
+        </div><br>
+        <p1 id="response" hidden="true">Great Job!</p1><br><br>
+        <button id="finish-button" type="submit" onclick='finish({{ quiz_images|tojson }}, "{{ option }}")'>Finish</button>
+        <button id="next-button" type="submit" onclick='nextOption()' hidden="true">Next</button>
     </div>
   </body>
 </html>
