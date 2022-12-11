@@ -57,6 +57,12 @@ body {
   font-size: large;
 }
 
+#next-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 form {
   display: inline-block;
   margin-top: 20px;
