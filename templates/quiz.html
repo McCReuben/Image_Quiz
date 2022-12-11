@@ -18,7 +18,8 @@
             {% endfor %}
         </div><br>
         <p1 id="response" hidden="true">Great Job!</p1><br><br>
-        <button type="submit" onclick='finish({{ quiz_images|tojson }}, "{{ option }}")'>Finish</button>
+        <button id="finish-button" type="submit" onclick='finish({{ quiz_images|tojson }}, "{{ option }}")'>Finish</button>
+        <button id="next-button" type="submit" onclick='nextOption()' hidden="true">Next</button>
     </div>
   </body>
 </html>

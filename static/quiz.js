@@ -21,16 +21,13 @@ function highlightImage(img, img_type, option, finish=false) {
 function nextOption(){
     // Send an AJAX request to the server
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/');
-    xhr.send();
-    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    // xhr.setRequestHeader('continue', 'yes');
-    // xhr.onload = function() {
-    //   if (xhr.status === 200) {
-    //     console.log("SUCCESS");
-    //   }
-    // };
-    // xhr.send();
+        xhr.open('GET', '/quiz?continuation=yes');
+        xhr.onload = function() {
+            // document.getElementById('next-button').hidden = false;
+            // document.getElementById('finish-button').hidden = true;
+            window.location.reload();
+        }
+        xhr.send();
 }
 
 
@@ -44,11 +41,6 @@ function finish(images, option='TEM') {
     
     if (score >= 7) document.getElementById('response').hidden = false;
 
-    var submitButton = document.querySelector('[type="submit"]');
-    submitButton.addEventListener('click', function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/');
-        xhr.send();
-    });
-    submitButton.textContent = 'Next'
+    document.getElementById('next-button').hidden = false;
+    document.getElementById('finish-button').hidden = true;
 }
