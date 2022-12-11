@@ -51,6 +51,11 @@ body {
   z-index: 2;
 }
 
+#response {
+  font-weight: bold;
+  color: green;
+  font-size: large;
+}
 
 form {
   display: inline-block;

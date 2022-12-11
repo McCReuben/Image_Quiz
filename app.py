@@ -56,7 +56,10 @@ def create_quiz(images):
     
     return urls_with_category_2dlst
 
-
+# print("SETUP TIME")
+# options = []
+# all_photos = []
+# idx = 0
 
 
 @app.route('/', methods=('GET', 'POST'))
@@ -70,17 +73,27 @@ def index():
             return redirect(url_for('quiz', prompt=prompt, options=options))
     return render_template('index.html')
 
-
 @app.route('/quiz', methods=('GET', 'POST'))
 def quiz():
+    if request.args.get("continue") == "yes":
+         return continue_quiz()
+    
     prompt = request.args.get("prompt")
     options = request.args.get("options").split(',')
     # searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
     searches_tmp = read_imgs()
     all_photos = [[res['original'] for res in search[0:10]] for search in searches_tmp]
     quiz_images = create_quiz(images = dict(zip(options, all_photos)))
-    return render_template('quiz.html', quiz_images=quiz_images, options=options)
+    return render_template('quiz.html', quiz_images=quiz_images, option=options[0])
 
+def continue_quiz():
+    pass
+    # if idx >= len(options):
+    #     idx = 0
+    #     return render_template('index.html')
+    # idx = idx + 1
+    # quiz_images = create_quiz(images = dict(zip(options, all_photos)))
+    # return render_template('quiz.html', quiz_images=quiz_images, options=options[idx])
 
 
 def read_imgs():
