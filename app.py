@@ -73,8 +73,6 @@ def quiz():
     print("QUIZ")
     if request.args.get("continuation") == "yes":
         session['idx'] = session['idx'] + 1
-        print("CONTINUE")
-        print(session['idx'])
         return render_template('quiz.html', quiz_images=session['quiz_images'], option=session['options'][session['idx']], cont='yes')
     else:
         session['idx'] = 0
@@ -84,52 +82,15 @@ def quiz():
         searches_tmp = read_imgs()
         session['all_photos'] = [[res['original'] for res in search[0:10]] for search in searches_tmp]
     session['quiz_images'] = create_quiz(images = dict(zip(session['options'], session['all_photos'])))
-    print(session['options'][session['idx']])
     return render_template('quiz.html', quiz_images=session['quiz_images'], option=session['options'][session['idx']])
 
-def continue_quiz():
-    pass
-    # if idx >= len(options):
-    #     idx = 0
-    #     return render_template('index.html')
-    # idx = idx + 1
-    # quiz_images = create_quiz(images = dict(zip(options, all_photos)))
-    # return render_template('quiz.html', quiz_images=quiz_images, options=options[idx])
-
-
 def read_imgs():
-    with open("data.txt", "rb") as file:
+    with open("example_image_data.txt", "rb") as file:
         searches = pickle.load(file)
     return searches
 
-# import pickle  
-# with open("data.txt", "wb") as file:
-#     pickle.dump(searches, file)
-
 # with open("data.txt", "rb") as file:
 #     searches = pickle.load(file)
-
-
-
-# def index():
-#     prompt = request.form['prompt']
-#     options = request.form['options'].split(',')
-#     searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
-#     photos = [[res['original'] for res in search[0:10]] for search in searches]
-    # return redirect(url_for('quiz', result=))
-
-
-
-
-
-
-# options = possible_search_terms[0:2]
-# prompt =  'Images from a'
-
-# searches = [GoogleSearch(generate_microscope_search_params(option, prompt)).get_dict()['images_results'] for option in options]
-
-# photos = [[res['original'] for res in search[0:10]] for search in searches]
-
 
 # import sys
 # og_stdout = sys.stdout
@@ -137,9 +98,3 @@ def read_imgs():
 #     sys.stdout = f
 #     print(photos)
 #     sys.stdout = og_stdout
-
-# searches
-# search = GoogleSearch(generate_microscope_search_params(possible_search_terms[1]))
-# results = search.get_dict()
-# images_results = results['images_results']
-# print(images_results)
