@@ -1,0 +1,4 @@
+Flask==2.0.2
+google_search_results==2.4.1
+pandas==1.5.2
+pandas_stubs==1.2.0.35
