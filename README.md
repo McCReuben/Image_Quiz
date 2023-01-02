@@ -29,7 +29,7 @@ cd Image_Quiz
 python3 -m venv venv
 ```
 
-3. Make a copy of the example environment variables file
+3. Make a copy of the example environment variables file, inputing your SerpApi key
 
    ```bash
     $ cp .env.example .env
